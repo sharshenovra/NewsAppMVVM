@@ -15,6 +15,16 @@ class DetailController: UIViewController {
     private lazy var newsDescription = CustomUILabel(title: "", fontSize: 20)
     private lazy var newsImage = UIImageView()
     
+    private lazy var viewModel: DetailViewModel = {
+        return DetailViewModel(delegate: self)
+    }()
+    
+    public static func newIntanse(delegate: NewsSelectDelegate) -> DetailController{
+        let controller = DetailController()
+        controller.viewModel.selectDelegate = delegate
+        return controller
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,3 +61,9 @@ class DetailController: UIViewController {
     }
 }
 
+extension DetailController: NewsShowDelegate{
+    func showNews(title: String, description: String){
+        newsTitle.setText(text: title)
+        newsDescription.setText(text: description)
+    }
+}

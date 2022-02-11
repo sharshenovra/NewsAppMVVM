@@ -9,6 +9,10 @@ import Foundation
 import RealmSwift
 import SnapKit
 
+protocol NewsCellDelegate: AnyObject{
+    func onClick(model: APIArticles)
+}
+
 class NewsTableView: UIView{
 
     private lazy var newsTableView: UITableView = {
@@ -20,7 +24,8 @@ class NewsTableView: UIView{
         return view
     }()
     
-
+    weak var delegate: NewsCellDelegate? = nil
+    
     override func layoutSubviews() {
         addSubview(newsTableView)
         newsTableView.snp.makeConstraints { make in
@@ -40,6 +45,13 @@ class NewsTableView: UIView{
 extension NewsTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let model = models?[indexPath.row]{
+            delegate?.onClick(model: model)
+            dump(model)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -8,7 +8,10 @@
 import Foundation
 import UIKit
 import SnapKit
-import RealmSwift
+
+protocol NewsSelectDelegate: AnyObject{
+    func selectNews(model: APIArticles)
+}
 
 class NewsController: UIViewController{
     
@@ -41,6 +44,21 @@ class NewsController: UIViewController{
         }
     }
     
+    
+    
+}
+
+extension NewsController: NewsCellDelegate {
+    func onClick(model: APIArticles){
+        viewModel.selectNews(model: model)
+    }
+}
+
+extension NewsController: NewsSelectDelegate{
+    func selectNews(model: APIArticles) {
+        viewModel.selectNews(model: model)
+        self.navigationController?.pushViewController(DetailController.newIntanse(delegate: self), animated: true)
+    }
 }
 
 extension NewsController: NewsDelegate {

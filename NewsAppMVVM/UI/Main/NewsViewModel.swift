@@ -15,16 +15,25 @@ protocol NewsDelegate: AnyObject {
 
 class NewsViewModel {
     
-    weak var newsDelegate: NewsDelegate? = nil
+    weak var delegate: NewsDelegate? = nil
+    
+    weak var selectDelegate: NewsSelectDelegate? = nil
+    
+    weak var showDelegate: NewsShowDelegate? = nil
     
     init(delegate: NewsDelegate) {
-        self.newsDelegate = delegate
+        self.delegate = delegate
 
     }
+    
+    func selectNews(model: APIArticles){
+        selectDelegate?.selectNews(model: model)
+    }
 
+    
 func getNews() {
     if NewsAPI.shared.downloadNews(completed: { news in
-        self.newsDelegate?.showNews(model: news)
+        self.delegate?.showNews(model: news)
     }) != nil{
         
     }
