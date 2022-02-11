@@ -3,7 +3,7 @@ import UIKit
 import Foundation
 
 protocol NewsShowDelegate: AnyObject{
-    func showNews(title: String, description: String)
+    func showNews(title: String, description: String, urlToImage: String)
 }
 
 class DetailViewModel{
@@ -17,6 +17,6 @@ class DetailViewModel{
     }
     
     func selectNews(model: APIArticles){
-        delegate?.showNews(title: model.title!, description: model.description!)
+        delegate?.showNews(title: model.title!, description: model.description!, urlToImage: model.urlToImage!)
     }
 }

@@ -29,7 +29,6 @@ class NewsViewModel {
     func selectNews(model: APIArticles){
         selectDelegate?.selectNews(model: model)
     }
-
     
 func getNews() {
     if NewsAPI.shared.downloadNews(completed: { news in

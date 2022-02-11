@@ -24,6 +24,8 @@ class NewsController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        newsTableView.delegate = self
+        
         setupConstraints()
         setupMainWindow()
         
@@ -51,13 +53,15 @@ class NewsController: UIViewController{
 extension NewsController: NewsCellDelegate {
     func onClick(model: APIArticles){
         viewModel.selectNews(model: model)
+        let vc = DetailController.newIntanse(delegate: self)
+        vc.showNews(title: model.title!, description: model.description!, urlToImage: model.urlToImage!)
+        present(vc, animated: true)
     }
 }
 
 extension NewsController: NewsSelectDelegate{
     func selectNews(model: APIArticles) {
         viewModel.selectNews(model: model)
-        self.navigationController?.pushViewController(DetailController.newIntanse(delegate: self), animated: true)
     }
 }
 

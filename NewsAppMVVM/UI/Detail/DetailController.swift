@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import Kingfisher
 
 class DetailController: UIViewController {
 
@@ -43,27 +44,30 @@ class DetailController: UIViewController {
         newsTitle.snp.makeConstraints { make in
             make.top.equalTo(view.safeArea.top)
             make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(view.frame.height / 10)
             make.centerX.equalToSuperview()
         }
         view.addSubview(newsDescription)
         newsDescription.snp.makeConstraints { make in
             make.top.equalTo(newsTitle.snp.bottom).offset(16)
             make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(view.frame.height / 3)
             make.centerX.equalToSuperview()
         }
         view.addSubview(newsImage)
         newsImage.snp.makeConstraints { make in
             make.top.equalTo(newsDescription.snp.bottom).offset(16)
-            make.width.equalToSuperview().multipliedBy(0.6)
+            make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(view.frame.width * 0.6)
-            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
         }
     }
 }
 
 extension DetailController: NewsShowDelegate{
-    func showNews(title: String, description: String){
+    func showNews(title: String, description: String, urlToImage: String){
         newsTitle.setText(text: title)
         newsDescription.setText(text: description)
+        newsImage.kf.setImage(with: URL(string: urlToImage))
     }
 }
