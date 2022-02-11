@@ -44,7 +44,7 @@ class DetailController: UIViewController {
         newsTitle.snp.makeConstraints { make in
             make.top.equalTo(view.safeArea.top)
             make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalTo(view.frame.height / 10)
+            make.height.equalTo(view.frame.height / 8)
             make.centerX.equalToSuperview()
         }
         view.addSubview(newsDescription)
@@ -65,7 +65,7 @@ class DetailController: UIViewController {
 }
 
 extension DetailController: NewsShowDelegate{
-    func showNews(title: String, description: String, urlToImage: String){
+    func fillNews(title: String, description: String, urlToImage: String){
         newsTitle.setText(text: title)
         newsDescription.setText(text: description)
         newsImage.kf.setImage(with: URL(string: urlToImage))

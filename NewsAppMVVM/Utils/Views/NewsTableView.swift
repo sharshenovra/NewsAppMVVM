@@ -26,8 +26,6 @@ class NewsTableView: UIView{
     
     weak var delegate: NewsCellDelegate? = nil
     
-    weak var selectDelegate: NewsSelectDelegate? = nil
-    
     override func layoutSubviews() {
         addSubview(newsTableView)
         newsTableView.snp.makeConstraints { make in
@@ -52,14 +50,12 @@ extension NewsTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let model = models?[indexPath.row]{
             delegate?.onClick(model: model)
-            
-            dump(model)
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = newsTableView.dequeueReusableCell(withIdentifier: "NewsCell") as! NewsCell
-        
+
         if let model = models?[indexPath.row] {
             cell.fill(model: model)
         }

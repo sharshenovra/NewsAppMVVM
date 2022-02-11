@@ -21,7 +21,6 @@ class NewsAPI{
                     var response = try JSONDecoder().decode(NewsAPIModel.self, from: data!)
                     DispatchQueue.main.async {
                         completed(response.newsAPIList)
-                        print("data downloaded")
                     }
                 } catch {
                     print("JSON Error")

@@ -24,12 +24,16 @@ class NewsController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        newsTableView.delegate = self
+        setupViews()
         
         setupConstraints()
         setupMainWindow()
         
         viewModel.getNews()
+    }
+    
+    private func setupViews(){
+        newsTableView.delegate = self
     }
     
     private func setupMainWindow() {
@@ -42,7 +46,7 @@ class NewsController: UIViewController{
         newsTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeArea.top)
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(view.safeArea.bottom)
         }
     }
     
@@ -54,7 +58,7 @@ extension NewsController: NewsCellDelegate {
     func onClick(model: APIArticles){
         viewModel.selectNews(model: model)
         let vc = DetailController.newIntanse(delegate: self)
-        vc.showNews(title: model.title!, description: model.description!, urlToImage: model.urlToImage!)
+        vc.fillNews(title: model.title!, description: model.description!, urlToImage: model.urlToImage!)
         present(vc, animated: true)
     }
 }
