@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class NewsAPIModel: Codable {
     public var newsAPIList: [APIArticles] = []
@@ -26,3 +27,4 @@ class APIArticles: Codable {
         case urlToImage = "urlToImage"
     }
 }
+

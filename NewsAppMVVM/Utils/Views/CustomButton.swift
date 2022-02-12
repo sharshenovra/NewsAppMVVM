@@ -20,6 +20,14 @@ class CustomButton: UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
     }
     
+    init(nameImage: String, color: UIColor) {
+        super.init(frame: .zero)
+        
+        titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        setImage(UIImage(systemName: "\(nameImage)"), for: .normal)
+        tintColor = color
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

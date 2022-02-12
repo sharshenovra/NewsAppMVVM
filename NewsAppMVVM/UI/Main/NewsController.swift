@@ -15,11 +15,15 @@ protocol NewsSelectDelegate: AnyObject{
 
 class NewsController: UIViewController{
     
+    
     private lazy var newsTableView = NewsTableView()
     
     private lazy var viewModel: NewsViewModel = {
         return NewsViewModel(delegate: self)
     }()
+    
+    private lazy var newsTitle = CustomUILabel(title: "Новости", fontSize: 30)
+    private lazy var favouriteButton = CustomButton(title: "Избранное")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,17 +38,33 @@ class NewsController: UIViewController{
     
     private func setupViews(){
         newsTableView.delegate = self
+        
+        favouriteButton.setOnClickListener { view in
+            self.present(FavouriteController(), animated: true)
+        }
     }
     
     private func setupMainWindow() {
-        view.backgroundColor = .black
+        view.backgroundColor = .darkGray
     }
     
     func setupConstraints(){
         
+        view.addSubview(favouriteButton)
+        favouriteButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeArea.top)
+            make.right.equalTo(view.safeArea.right).offset(-16)
+        }
+        
+        view.addSubview(newsTitle)
+        newsTitle.snp.makeConstraints { make in
+            make.top.equalTo(view.safeArea.top)
+            make.left.equalTo(view.safeArea.left).offset(16)
+        }
+        
         view.addSubview(newsTableView)
         newsTableView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeArea.top)
+            make.top.equalTo(newsTitle.snp.bottom)
             make.width.equalToSuperview()
             make.bottom.equalTo(view.safeArea.bottom)
         }
@@ -58,7 +78,7 @@ extension NewsController: NewsCellDelegate {
     func onClick(model: APIArticles){
         viewModel.selectNews(model: model)
         let vc = DetailController.newIntanse(delegate: self)
-        vc.fillNews(title: model.title!, description: model.description!, urlToImage: model.urlToImage!)
+        vc.fillNews(model: model)
         present(vc, animated: true)
     }
 }
@@ -75,3 +95,4 @@ extension NewsController: NewsDelegate {
         newsTableView.fill(models: model)
     }
 }
+

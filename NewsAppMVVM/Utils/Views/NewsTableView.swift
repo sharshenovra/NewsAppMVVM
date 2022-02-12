@@ -19,7 +19,7 @@ class NewsTableView: UIView{
         let view = UITableView()
         view.delegate = self
         view.dataSource = self
-        view.backgroundColor = .black
+        view.backgroundColor = .darkGray
         view.register(NewsCell.self, forCellReuseIdentifier: "NewsCell")
         return view
     }()

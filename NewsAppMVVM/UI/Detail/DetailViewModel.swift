@@ -3,7 +3,7 @@ import UIKit
 import Foundation
 
 protocol NewsShowDelegate: AnyObject{
-    func fillNews(title: String, description: String, urlToImage: String)
+    func fillNews(model: APIArticles)
 }
 
 

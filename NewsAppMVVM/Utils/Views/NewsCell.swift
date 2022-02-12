@@ -17,10 +17,11 @@ class NewsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = UIColor.gray
         
-        layer.borderWidth = 3
-        layer.borderColor = UIColor.black.cgColor
-        layer.cornerRadius = 20
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.cornerRadius = 10
         contentView.clipsToBounds = true
         
         selectionStyle = UITableViewCell.SelectionStyle.none
@@ -28,7 +29,6 @@ class NewsCell: UITableViewCell {
         selectionStyle = .none
         
         addSubview(newsTitle)
-        backgroundColor = UIColor.darkGray
         newsTitle.snp.makeConstraints {make in
             make.height.equalToSuperview().dividedBy(2.2)
             make.width.equalToSuperview().multipliedBy(0.6)

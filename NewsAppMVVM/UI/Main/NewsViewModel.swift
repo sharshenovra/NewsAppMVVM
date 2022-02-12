@@ -12,6 +12,9 @@ protocol NewsDelegate: AnyObject {
     func showNews(model: [APIArticles])
 }
 
+protocol FavouriteDelegate: AnyObject {
+    func showFavouriteNews(model: Results<NewsModel>)
+}
 
 class NewsViewModel {
     
@@ -20,6 +23,8 @@ class NewsViewModel {
     weak var selectDelegate: NewsSelectDelegate? = nil
     
     weak var showDelegate: NewsShowDelegate? = nil
+    
+    weak var favDelegate: FavouriteDelegate? = nil
     
     init(delegate: NewsDelegate) {
         self.delegate = delegate
@@ -30,13 +35,10 @@ class NewsViewModel {
         selectDelegate?.selectNews(model: model)
     }
     
-func getNews() {
-    if NewsAPI.shared.downloadNews(completed: { news in
-        self.delegate?.showNews(model: news)
-    }) != nil{
-        
+    func getNews() {
+    NewsAPI.shared.downloadNews { array in
+        self.delegate?.showNews(model: array)
     }
-    
 }
     
 }

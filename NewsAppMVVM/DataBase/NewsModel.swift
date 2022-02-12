@@ -11,13 +11,11 @@ import RealmSwift
 class NewsModel: Object {
     @objc dynamic var newsTitle = ""
     @objc dynamic var newsDescription = ""
-    @objc dynamic var newsUrlToImage = ""
     
-    static func createNewsModel(newsTitle: String, newsDescription: String, newsUrlToImage: String) -> NewsModel {
+    static func createNewsModel(newsTitle: String, newsDescription: String) -> NewsModel {
         let model = NewsModel()
         model.newsTitle = newsTitle
         model.newsDescription = newsDescription
-        model.newsUrlToImage = newsUrlToImage
         return model
     }
 }

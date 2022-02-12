@@ -34,13 +34,17 @@ class DataBase {
         return realm?.objects(NewsModel.self)
     }
     
+    func deleteItem(model: NewsModel){
+        
+    }
+    
     func deleteAllHistory() {
         do {
             try realm?.write{
                 realm?.deleteAll()
             }
         } catch { 
-            print("DataBase not work saveHistory")
+            print("DataBase not work deleteHistory")
         }
     }
 }
